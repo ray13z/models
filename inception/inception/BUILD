@@ -12,6 +12,27 @@ package_group(
     packages = ["//inception/..."],
 )
 
+py_binary(
+    name = "eigen",
+    srcs = [
+        "eigen.py",
+    ],
+    deps = [
+        ":inception"
+    ],
+)
+
+py_binary(
+    name = "test",
+    srcs = [
+        "test.py",
+    ],
+    deps = [
+        ":flowers_data",
+        ":inception_eval",
+    ],
+)
+
 py_library(
     name = "dataset",
     srcs = [
