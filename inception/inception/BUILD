@@ -13,6 +13,16 @@ package_group(
 )
 
 py_binary(
+    name = "mnist",
+    srcs = [
+        "mnist.py",
+    ],
+    deps = [
+        ":inception"
+    ],
+)
+
+py_binary(
     name = "eigen",
     srcs = [
         "eigen.py",

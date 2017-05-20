@@ -21,6 +21,7 @@ def coarse_stack(features, predictions):
     """Model function for coarse stack."""
     # Input Layer
     input_layer = tf.reshape(features, [-1, 240, 320, 3])
+    print("input_layer: ", tf.shape(input_layer))
     with arg_scope([conv2d, fc], stddev=0.01,
                    weight_decay=0.0005, activation=tf.nn.relu):
         # See https://github.com/tensorflow/models/blob/master/inception/
@@ -36,23 +37,28 @@ def coarse_stack(features, predictions):
         #                           scope='pool1')
         net = conv2d(input_layer, 96, kernel_size=[11, 11],
                      stride=4, padding='VALID', scope='conv1')
+        print("conv1: ", tf.shape(net))
         net = max_pool(net, kernel_size=[3, 3], stride=[2, 2],
                        scope='pool1')
+        print("pool1: ", tf.shape(net))
         net = conv2d(net, 256, kernel_size=[5, 5], stride=1,
                      padding='SAME', scope='conv2')
+        print("conv2: ", tf.shape(net))
         net = max_pool(net, kernel_size=[3, 3], stride=[2, 2],
                        scope='pool2')
+        print("pool2: ", tf.shape(net))
         net = conv2d(net, 384, kernel_size=[3, 3], stride=1,
                      padding='SAME', scope='conv3')
+        print("conv3: ", tf.shape(net))
         net = conv2d(net, 384, kernel_size=[3, 3], stride=1,
                      padding='SAME', scope='conv4')
+        print("conv4: ", tf.shape(net))
         net = conv2d(net, 256, kernel_size=[3, 3], stride=1,
                      padding='SAME', scope='conv5')
+        print("conv5: ", tf.shape(net))
         net = max_pool(net, kernel_size=[3, 3], stride=[2, 2],
                        scope='pool5')
-
-        # shape of pool5
-        print(net.shape)
+        print("pool5: ", tf.shape(net))
 
         # net = flatten(net, scope='flatten5')
         # net = fc(net, 4096, scope='fc6')
