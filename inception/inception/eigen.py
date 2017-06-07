@@ -28,6 +28,7 @@ def coarse_stack(features):
     # Input Layer
     input_layer = tf.reshape(features, [-1, 240, 320, 3])
     print("input_layer: ", input_layer.get_shape())
+    tf.summary.image('input', input_layer, 10)
 
     with arg_scope([conv2d, fc], stddev=0.01,
                    weight_decay=0.0005, activation=tf.nn.relu):
